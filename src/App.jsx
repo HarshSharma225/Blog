@@ -26,19 +26,13 @@ function App() {
 
 
   return !loading ? (
-    <div className="min-h-screen flexflex-wrap content-between bg-blue-400">
+    <div className="min-h-screen flex flex-wrap content-between bg-blue-400">
        <div className="w-full block">
-        <div class="top-0 left-0 right-0">
           <Header/>
-        </div>
-        
         <main>
           <Outlet className='w-auto'/>
         </main>
-        <div class="align-bottom">
           <Footer/>
-        </div>
-        
        </div>
     </div>
   ) :  null

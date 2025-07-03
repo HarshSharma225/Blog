@@ -9,7 +9,6 @@ function Select({
     const id = useId()
   return (
     <div className='w-full'>
-        {/* PROBLEM: The label is rendered but does not display the label text, making the label invisible. Should use {label} inside the label tag. */}
         {label && <label htmlFor={id} className=''>{label}</label>}
         <select
         {...props}
