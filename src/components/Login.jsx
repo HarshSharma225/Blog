@@ -17,10 +17,10 @@ function Login() {
         try {
             const session = await authService.login(data)
             if(session){
-                const userData = await authService
-                .getCurrentUser()
-                if(userData) dispatch(authLogin(userData))
+                const userData = await authService.getCurrentUser()
+                if(userData) dispatch(authLogin({ userData }))
                 navigate("/")
+                window.location.reload();
             }
             
         } catch (error) {
