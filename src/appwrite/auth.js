@@ -2,7 +2,7 @@ import conf from "../conf/conf";
 import { Client, Account, ID } from "appwrite";
 
 export class AuthService {
-    client = new Client;
+    client = new Client();
     account;
 
     constructor(){
@@ -10,15 +10,15 @@ export class AuthService {
             .setEndpoint(conf.appwriteURL)
             .setProject(conf.appwriteId);
 
-        const account =new this.account(this.client);
+        this.account =new Account(this.client);
     }
 
-    async createAccount(email,password,name){
+    async createAccount({email,name,password}){
         try{
             const userAccount = await this.account.create(ID.unique(),email,password,name)
             
             if(userAccount){
-                return this.login(email,password);
+                return this.login({email,password});
 
             }
             else{
@@ -30,9 +30,9 @@ export class AuthService {
         }  
     }
 
-    async login(email,password){
+    async login({email,password}){
         try{
-            return await this.account.createEmailPasswordSession(email, password);
+            return await this.account.createEmailPasswordSession(email, password);      ///////////createEmailPasswordSession
         }
         catch(err){
             throw err;
@@ -41,10 +41,15 @@ export class AuthService {
 
     async getCurrentUser(){
         try{
-            return await this.account.get();
+            const user =  await this.account.get();
+            if(user) return user;
+            else{
+                console.log("error in auth.js, line no 47");
+            }
         }
         catch(err){
-            throw err;
+            console.log("Appwrite serive :: getCurrentUser :: error", err);
+            return null;
         }
 
         return null;
