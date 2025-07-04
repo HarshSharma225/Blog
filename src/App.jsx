@@ -25,14 +25,12 @@ function App() {
   },[])
 
   return (
-    <div className="min-h-screen flex flex-wrap content-between bg-blue-400">
-       <div className="w-full block">
-          <Header/>
-        <main>
-          <Outlet className='w-auto'/>
-        </main>
-          <Footer/>
-       </div>
+    <div className="min-h-screen flex flex-col bg-blue-400">
+      <Header/>
+      <main className="flex-1">
+        <Outlet className='w-auto'/>
+      </main>
+      <Footer/>
     </div>
   )
 }
